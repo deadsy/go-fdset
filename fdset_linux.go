@@ -57,27 +57,27 @@ import (
 
 //-----------------------------------------------------------------------------
 
-// Zero all fd bits.
+// Zero zeroes all fd bits.
 func Zero(set *syscall.FdSet) {
 	C._FD_ZERO(unsafe.Pointer(set))
 }
 
-// Clear the fd bit.
+// Clr clears the fd bit.
 func Clr(fd int, set *syscall.FdSet) {
 	C._FD_CLR(C.int(fd), unsafe.Pointer(set))
 }
 
-// Set the fd bit.
+// Set sets the fd bit.
 func Set(fd int, set *syscall.FdSet) {
 	C._FD_SET(C.int(fd), unsafe.Pointer(set))
 }
 
-// Is the fd set?
+// IsSet checks if the fd is set.
 func IsSet(fd int, set *syscall.FdSet) bool {
 	return C._FD_ISSET(C.int(fd), unsafe.Pointer(set)) != 0
 }
 
-// Return the highest numbered fd in the set, or -1 if no bits are set.
+// Max returns the highest numbered fd in the set, or -1 if no bits are set.
 func Max(set *syscall.FdSet) int {
 	return int(C._FD_MAX(unsafe.Pointer(set)))
 }
